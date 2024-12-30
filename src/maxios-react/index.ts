@@ -23,10 +23,7 @@ export const useMaxios = <
     fn(...args)
       .requestError(setRequestError)
       .error(setErrorResult)
-      .loading(status => {
-        console.log('Loading Status:', status, '---')
-        setLoading(status)
-      })
+      .loading(setLoading)
       .success(setResult)
   }, [fn])
 

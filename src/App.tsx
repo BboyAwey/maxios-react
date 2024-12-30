@@ -11,16 +11,16 @@ globalConfig({
     'Some-Data-From-Global-Config': 'Some Data Value From Global Config'
   }
 }, {
-  // requestError: err => {
-  //   console.log('Request Error From Global Config:', err)
-  // },
+  requestError: err => {
+    console.log('Request Error From Global Config:', err)
+  },
   // expect: response => {
   //   console.log('Expect From Global Config:', response)
   //   return response.data?.code === 0
   // },
-  // error: res => {
-  //   console.log('Error From Global Config:', res)
-  // },
+  error: res => {
+    console.log('Error From Global Config:', res)
+  },
   loading: status => {
     console.log('Loading Status From Global Config:', status)
   },
@@ -28,12 +28,12 @@ globalConfig({
   //   console.log('Extractor From Global Config:', response)
   //   return response.data.data
   // },
-  // success: res => {
-  //   console.log('Success From Global Config:', res)
-  // },
-  // anyway: res => {
-  //   console.log('Anyway From Global Config:', res)
-  // }
+  success: res => {
+    console.log('Success From Global Config:', res)
+  },
+  anyway: res => {
+    console.log('Anyway From Global Config:', res)
+  }
 })
 
 const request = modulize({
@@ -44,16 +44,16 @@ const request = modulize({
     'Some-Data-From-Module': 'Some Data Value From Module'
   }
 }, {
-  // requestError: err => {
-  //   console.log('Request Error From Module:', err)
-  // },
+  requestError: err => {
+    console.log('Request Error From Module:', err)
+  },
   // expect: response => {
   //   console.log('Expect From Module:', response)
   //   return response.data?.code === 0
   // },
-  // error: res => {
-  //   console.log('Error From Module:', res)
-  // },
+  error: res => {
+    console.log('Error From Module:', res)
+  },
   loading: status => {
     console.log('Loading Status From Module:', status)
   },
@@ -61,12 +61,12 @@ const request = modulize({
   //   console.log('Extractor From Module:', response)
   //   return response.data.data
   // },
-  // success: res => {
-  //   console.log('Success From Module:', res)
-  // },
-  // anyway: res => {
-  //   console.log('Anyway From Module:', res)
-  // }
+  success: res => {
+    console.log('Success From Module:', res)
+  },
+  anyway: res => {
+    console.log('Anyway From Module:', res)
+  }
 })
 
 interface RequestBody {
@@ -86,16 +86,16 @@ const myModel = {
       url: 'get-shit',
       data: reqBody
     }, {
-      // requestError: err => {
-      //   console.log('Request Error From Request:', err)
-      // },
+      requestError: err => {
+        console.log('Request Error From Request:', err)
+      },
       // expect: response => {
       //   console.log('Expect From Request:', response)
       //   return response.data?.code === 0
       // },
-      // error: res => {
-      //   console.log('Error From Request:', res)
-      // },
+      error: res => {
+        console.log('Error From Request:', res)
+      },
       loading: status => {
         console.log('Loading Status From Request:', status)
       },
@@ -103,12 +103,12 @@ const myModel = {
       //   console.log('Extractor From Request:', response)
       //   return response.data.data
       // },
-      // success: res => {
-      //   console.log('Success From Request:', res)
-      // },
-      // anyway: res => {
-      //   console.log('Anyway From Request:', res)
-      // }
+      success: res => {
+        console.log('Success From Request:', res)
+      },
+      anyway: res => {
+        console.log('Anyway From Request:', res)
+      }
     })
   }
 }
