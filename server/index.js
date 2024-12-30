@@ -1,31 +1,30 @@
-const Koa = require('koa')
-const Router = require('@koa/router')
-const koaBody = require('koa-body')
+import Koa from 'koa'
+import Router from '@koa/router'
+import koaBody from 'koa-body'
 
 const app = new Koa()
 const router = new Router({
   prefix: '/api'
 })
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-router.get('/get-shit-2', async (ctx, next) => {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 5000)
-  })
+router.get('/get-shit', async (ctx, next) => {
+  await sleep(2600)
+  const requestBody = ctx.request.body
   ctx.body = {
     code: 0,
     msg: '',
     data: {
-      shit: 1
+      shit: 1,
+      ...(requestBody || {})
     }
   }
   ctx.status = 200
   await next()
 })
 
-router.get('/get-shit', async (ctx, next) => {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 1000)
-  })
+router.get('/get-another-shit', async (ctx, next) => {
+  await sleep(1456)
   ctx.body = {
     code: 0,
     msg: '',
@@ -39,6 +38,7 @@ router.get('/get-shit', async (ctx, next) => {
 
 
 router.put('/put-shit', async (ctx, next) => {
+  await sleep(1789)
   ctx.body = {
     code: 0,
     msg: '',
@@ -49,6 +49,7 @@ router.put('/put-shit', async (ctx, next) => {
 })
 
 router.post('/post-shit', async (ctx, next) => {
+  await sleep(1999)
   ctx.body = {
     code: 0,
     msg: '',
@@ -59,6 +60,7 @@ router.post('/post-shit', async (ctx, next) => {
 })
 
 router.delete('/delete-shit', async (ctx, next) => {
+  await sleep(999)
   ctx.body = {
     code: 0,
     msg: '',
@@ -68,22 +70,37 @@ router.delete('/delete-shit', async (ctx, next) => {
   await next()
 })
 
-router.get('/http-error-shit', async (ctx, next) => {
+router.get('/request-error', async (ctx, next) => {
+  await sleep(1234)
   ctx.status = 500
-  ctx.body = 'shit happened'
+  ctx.body = 'request error shit happened'
+  await next()
 })
 
-router.get('/biz-error-shit', async (ctx, next) => {
+router.get('/error', async (ctx, next) => {
+  await sleep(1024)
   ctx.status = 200
   ctx.body = {
     code: 1,
-    msg: 'shit happened',
+    msg: 'error shit happened',
     data: ctx.request.query
   }
+  await next()
 })
 
-const PORT = 3000
-app.use(koaBody())
+router.get('/timeout', async (ctx, next) => {
+  await sleep(9999999)
+  ctx.status = 200
+  ctx.body = {
+    code: 1,
+    msg: 'error shit happened',
+    data: ctx.request.query
+  }
+  await next()
+})
+
+const PORT = 3211
+app.use(koaBody.default())
 app.use(router.routes())
 
 app.listen(PORT)
